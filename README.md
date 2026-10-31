@@ -4,9 +4,15 @@ The **frontend** of MERNCAMP, a **social network built by devs for devs**, power
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
-*(Screenshots welcome — open a PR to add them.)*
+| Register | Dashboard — post form + news feed |
+|----------|-----------------------------------|
+| ![Register page](docs/screenshots/register.png) | ![User dashboard](docs/screenshots/dashboard.png) |
+
+| Home feed — parallax hero + real-time posts |
+|---------------------------------------------|
+| ![News feed](docs/screenshots/feed.png) |
 
 ---
 
