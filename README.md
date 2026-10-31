@@ -5,7 +5,8 @@ The **frontend** of MERNCAMP, a **social network built by devs for devs**, power
 ---
 
 ## 📸 Screenshot
-*(Add your application screenshots here - homepage, news feed, profile page, etc.)*
+
+*(Screenshots welcome — open a PR to add them.)*
 
 ---
 
@@ -18,7 +19,7 @@ The **frontend** of MERNCAMP, a **social network built by devs for devs**, power
 
 ### ✍️ **Posting**
 - Rich-text post creation with **Quill** editor
-- Image upload for posts (up to 5 MB, stored on Cloudinary)
+- Image upload for posts (stored server-side on Cloudinary)
 - Edit and delete your own posts
 - Single post view with media rendering
 
@@ -30,7 +31,7 @@ The **frontend** of MERNCAMP, a **social network built by devs for devs**, power
 - View user profiles and their posts
 
 ### 🔐 **Authentication & Profile**
-- User registration and login (JWT stored client-side)
+- User registration and login (JWT + user object persisted in `localStorage` under the `auth` key)
 - Axios response interceptor for automatic logout on `401`
 - Password recovery with a personal secret question
 - Profile update (name, about, image)
@@ -56,7 +57,6 @@ The **frontend** of MERNCAMP, a **social network built by devs for devs**, power
 **Frontend Framework:**
 - [Next.js 15](https://nextjs.org/) - React framework (Pages Router)
 - [React 18](https://react.dev/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 
 **Styling:**
 - [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework
@@ -154,8 +154,9 @@ merncamp-client/
 │   │   ├── AuthForm.jsx     # Login / Register form
 │   │   ├── CommentForm.jsx  # Comment form
 │   │   ├── ForgotPasswordForm.jsx
-│   │   ├── PostForm.jsx     # Post create / update form
-│   │   └── PostImage.jsx    # Post image upload
+│   │   └── PostForm.jsx     # Post create / update form
+│   ├── images/
+│   │   └── PostImage.jsx    # Post image display
 │   ├── routes/              # Route guards
 │   │   ├── AdminRoute.jsx   # Admin-only wrapper
 │   │   └── UserRoute.jsx    # Logged-in-only wrapper
@@ -163,7 +164,7 @@ merncamp-client/
 │   └── Search.jsx           # User search
 ├── context/                 # React Context
 │   └── index.js             # UserContext (auth state + axios setup)
-├── functions/               # Utility functions
+├── functions/               # (currently empty — API/config logic lives in context/index.js)
 ├── pages/                   # Next.js Pages Router
 │   ├── _app.js              # App wrapper + UserProvider
 │   ├── _document.jsx        # HTML document setup
@@ -208,6 +209,8 @@ npm run dev
 
 > ⚠️ The API server ([merncamp-server](https://github.com/alijamshidy/merncamp-server)) must be running and both apps must share the same URLs configured in their environment variables.
 
+> ⚠️ **Known limitation:** the home page feed URL is hardcoded to `http://localhost:8000/api/posts` in `pages/index.jsx` (`getServerSideProps`). If you deploy the backend elsewhere, update that line too — every other request correctly uses `NEXT_PUBLIC_API`.
+
 ---
 
 ## 📦 Available Scripts
@@ -217,8 +220,6 @@ npm run dev
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
 
 ---
 
@@ -248,4 +249,4 @@ For support, please open an issue or contact the maintainer.
 
 ## 🏷 Topics
 
-`nextjs`, `react`, `typescript`, `social-network`, `mern`, `mern-stack`, `tailwindcss`, `antd`, `socket-io`, `quill`, `news-feed`, `frontend`
+`nextjs`, `react`, `social-network`, `mern`, `mern-stack`, `tailwindcss`, `antd`, `socket-io`, `quill`, `news-feed`, `frontend`
